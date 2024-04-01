@@ -1,0 +1,17 @@
+package com.example.bookstore.exceptions;
+
+/**
+ * Created by Abdulaziz Pulatjonov
+ * Date: 03/11/2024 14:38
+ */
+
+public class UserNotFoundException extends RuntimeException{
+    private final String msg;
+    private final Integer code;
+
+    public UserNotFoundException(String msg, Integer code) {
+        super(msg);
+        this.msg = msg;
+        this.code = code;
+    }
+}
