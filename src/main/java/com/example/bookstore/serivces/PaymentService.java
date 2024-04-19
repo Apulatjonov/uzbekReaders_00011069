@@ -49,10 +49,11 @@ public class PaymentService {
         }else{
             user.setPaidTill(user.getPaidTill().plusMonths(months));
         }
-        userRepo.save(user);
-        cardRepo.save(card);
+        user = userRepo.save(user);
+        card = cardRepo.save(card);
         Payment payment = new Payment(dto);
         payment.setCard(card);
+        payment.setUser(user);
         return paymentRepo.save(payment).toDto();
     }
     public CardDTO fillCard(PaymentDTO dto){

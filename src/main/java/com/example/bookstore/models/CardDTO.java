@@ -20,7 +20,7 @@ public class CardDTO{
     private String pan;
     private String panMask;
     private String expiryDate;
-    private Double balance;
+    private Double balance = 0.0;
     private List<PaymentDTO> payments;
 
 }

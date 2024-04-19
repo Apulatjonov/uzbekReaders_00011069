@@ -6,6 +6,7 @@ import com.example.bookstore.models.PaymentDTO;
 import com.example.bookstore.serivces.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 03/24/2024 14:06
  */
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class PaymentController extends BaseController implements PaymentEndpointV1 {

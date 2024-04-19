@@ -1,11 +1,11 @@
 package com.example.bookstore.entities;
 
 import com.example.bookstore.models.BaseUser;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -21,7 +21,7 @@ import java.util.Set;
 public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Column(name = "email")
     private String email;
@@ -36,7 +36,11 @@ public class User extends BaseEntity{
     private Set<Card> cards;
     @Column(name = "paid_till")
     private LocalDateTime paidTill;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Book> recentlyViewedBooks;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Book> ratedBooks;
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Book> books;
 
     public User(BaseUser userDTO) {

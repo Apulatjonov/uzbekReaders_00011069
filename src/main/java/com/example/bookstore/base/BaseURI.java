@@ -14,7 +14,7 @@ public interface BaseURI {
     String fillProfile = "/fillProfile";
     String subscribe = "/subscribe";
     String searchBook = "/searchBook";
-    String getBook = "/getBook";
+    String getBook = "/book";
     String myBooks = "/myBooks";
     String DeleteProfile = "/deleteProfile";
     String payment = "/payment";
@@ -28,4 +28,12 @@ public interface BaseURI {
     String delete = "/delete";
     String book = "/book";
     String addBook = "/addBook";
+    String getBooks = "/books";
+    String comment = "/comments";
+    String byBook = "/book";;
+    String rate = "/rate";;
+    String currentlyReading = "/currentlyReading";
+    String recentlyViewed = "/recentlyViewed";
+    String rated = "/rated";
+    String category = "/category";
 }

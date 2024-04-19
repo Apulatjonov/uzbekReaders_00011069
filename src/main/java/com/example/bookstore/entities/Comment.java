@@ -1,9 +1,10 @@
 package com.example.bookstore.entities;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import jakarta.persistence.*;
 
 /**
  * Created by Abdulaziz Pulatjonov
@@ -17,13 +18,15 @@ import lombok.Setter;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Column(name = "author")
     private String user;
     @Column(name = "body")
     private String body;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comments")
     private Book book;
+    @Column(name = "user_id")
+    private Long userId;
 }

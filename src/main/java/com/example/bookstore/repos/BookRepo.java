@@ -2,8 +2,10 @@ package com.example.bookstore.repos;
 
 import com.example.bookstore.entities.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 /**
@@ -15,4 +17,5 @@ import java.util.List;
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
     List<Book> searchBooksByAuthorOrCategoryOrTitle(String word, String category, String title);
+    List<Book> findAllByCategory(String category);
 }

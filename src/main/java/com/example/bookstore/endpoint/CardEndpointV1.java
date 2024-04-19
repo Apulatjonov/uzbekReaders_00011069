@@ -20,4 +20,6 @@ public interface CardEndpointV1 {
     ResponseEntity<?> updateCard(@RequestBody CardDTO cardDTO);
     @DeleteMapping(BaseURI.delete + "/{id}")
     ResponseEntity<?> deleteCard(@PathVariable Long id);
+    @GetMapping("/{userId}/cards")
+    ResponseEntity<?> getUserCards(@PathVariable Long userId);
 }

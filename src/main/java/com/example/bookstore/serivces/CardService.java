@@ -12,7 +12,10 @@ import com.example.bookstore.repos.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by Abdulaziz Pulatjonov
@@ -72,4 +75,14 @@ public class CardService {
         return true;
     }
 
+    public List<CardDTO> getUserCards(Long userId) {
+        Optional<User> entity = userRepo.findById(userId);
+        if (entity.isEmpty()){
+            throw new UserNotFoundException(userId.toString(), 404);
+        }
+        Optional<List<Card>> listOptional = cardRepo.findAllByUserId(userId);
+        return listOptional.map(cards -> cards.stream()
+                .map(Card::toDto)
+                .collect(Collectors.toList())).orElseGet(ArrayList::new);
+    }
 }

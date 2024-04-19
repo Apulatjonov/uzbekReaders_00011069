@@ -2,7 +2,10 @@ package com.example.bookstore.entities;
 
 import com.example.bookstore.models.CardDTO;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ import java.util.List;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @ManyToOne
     @JoinColumn(name = "cards")
@@ -37,7 +40,7 @@ public class Card {
     public Card(CardDTO dto) {
         this.pan = dto.getPan();
         this.expiryDate = dto.getExpiryDate();
-        this.balance = dto.getBalance();
+        this.balance = Double.valueOf((Math.random() * ((1000 - 50) + 1)) + 50);
     }
 
     public CardDTO toDto() {

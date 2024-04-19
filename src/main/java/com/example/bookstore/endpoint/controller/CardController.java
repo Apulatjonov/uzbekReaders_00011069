@@ -6,6 +6,7 @@ import com.example.bookstore.models.CardDTO;
 import com.example.bookstore.serivces.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 03/24/2024 14:21
  */
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class CardController extends BaseController implements CardEndpointV1 {
@@ -36,4 +38,10 @@ public class CardController extends BaseController implements CardEndpointV1 {
     public ResponseEntity<?> deleteCard(Long id) {
         return ResponseEntity.ok(cardService.delete(id));
     }
+
+    @Override
+    public ResponseEntity<?> getUserCards(Long userId) {
+        return ResponseEntity.ok(cardService.getUserCards(userId));
+    }
+
 }

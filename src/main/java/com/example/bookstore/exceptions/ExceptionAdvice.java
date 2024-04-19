@@ -27,7 +27,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = PasswordIncorrectException.class)
     protected ResponseEntity<?> handlePasswordIncorrectException(
             RuntimeException ex, WebRequest request){
-        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.valueOf(401), request);
     }
     @ExceptionHandler(value = UserNotFoundException.class)
     protected ResponseEntity<?> handleUserNotFoundException(
@@ -58,5 +58,11 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<?> handleNotFoundException(
             RuntimeException ex, WebRequest request){
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(value = AlreadyRatedException.class)
+    protected ResponseEntity<?> handleAlreadyRatedException(
+            AlreadyRatedException ex, WebRequest request){
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.valueOf(402), request);
     }
 }

@@ -76,4 +76,13 @@ public class UserService {
         userRepo.deleteById(id);
         return true;
     }
+
+    public UserDTO getProfile(Long id) {
+        Optional<User> entity = userRepo.findById(id);
+        if (entity.isEmpty()){
+            throw new UserNotFoundException(id.toString(), 404);
+        }
+        User user = entity.get();
+        return new UserDTO().fromEntity(user);
+    }
 }

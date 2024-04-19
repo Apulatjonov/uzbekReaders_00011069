@@ -18,11 +18,13 @@ public class CommentDTO {
     private String user;
     private String body;
     private Long bookId;
+    private Long userId;
     public CommentDTO fromEntity(Comment comment){
         this.setId(comment.getId());
         this.setUser(comment.getUser());
         this.setBody(comment.getBody());
         this.setBookId(comment.getId());
+        this.setUserId(comment.getUserId());
         return this;
     }
 }

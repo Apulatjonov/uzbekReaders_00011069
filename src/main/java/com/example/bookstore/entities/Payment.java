@@ -1,9 +1,9 @@
 package com.example.bookstore.entities;
 
 import com.example.bookstore.models.PaymentDTO;
-import jakarta.persistence.*;
 import lombok.*;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -21,14 +21,14 @@ public class Payment extends BaseEntity{
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Column(name = "amount")
     private Double amount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payments")
     private Card card;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     public Payment(PaymentDTO dto) {

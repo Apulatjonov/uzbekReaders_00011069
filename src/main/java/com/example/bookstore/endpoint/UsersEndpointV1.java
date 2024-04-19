@@ -23,4 +23,6 @@ public interface UsersEndpointV1 {
     ResponseEntity<?> fillProfile(@RequestBody UserDTO userDTO);
     @DeleteMapping(BaseURI.DeleteProfile + "/{id}")
     ResponseEntity<?> deleteProfile(@PathVariable Long id);
+    @GetMapping("/{id}")
+    ResponseEntity<?> getProfile(@PathVariable Long id);
 }
