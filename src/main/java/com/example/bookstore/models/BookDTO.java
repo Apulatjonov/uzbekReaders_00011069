@@ -29,6 +29,7 @@ public class BookDTO extends BaseBook{
     private CategoryDTO category;
     private AuthorDTO author;
     private Long userId;
+    private Long totalPages;
 
     public BookDTO(Book ent) {
         this.setId(ent.getId());
@@ -42,31 +43,18 @@ public class BookDTO extends BaseBook{
         this.setImgUrl(ent.getImgUrl());
         this.setPrice(ent.getPrice());
         this.setDescription(ent.getDescription());
-        this.setPublishedDate(ent.getPublishedDate());
-    }
-
-    public BookDTO fromEntity(Book book){
-        BookDTO dto = new BookDTO();
-        dto.setId(book.getId());
-        dto.setScore(book.getScore());
-        dto.setAuthorName(book.getAuthor().getFullName());
-        dto.setAuthorId(book.getAuthor().getId());
-        dto.setCategoryName(book.getCategory().getCategory());
-        dto.setCategoryId(book.getCategory().getId());
-        dto.setTitle(book.getTitle());
-        dto.setImgUrl(book.getImgUrl());
-        dto.setPrice(book.getPrice());
-        dto.setDescription(book.getDescription());
-        if (book.getComments() != null){
+        if (ent.getComments() != null){
             List<CommentDTO> comments = new ArrayList<>();
-            for (Comment comment : book.getComments()){
+            for (Comment comment : ent.getComments()){
                 comments.add(new CommentDTO().fromEntity(comment));
             }
-            dto.setComments(comments);
+            this.setComments(comments);
         }
-        dto.setPublishedDate(book.getPublishedDate());
-        return dto;
+        this.setPublishedDate(ent.getPublishedDate());
+        this.setTotalPages(ent.getTotalPages());
+
     }
+
     public Book toEntity(){
         Book book = new Book();
         book.setScore(this.getScore());

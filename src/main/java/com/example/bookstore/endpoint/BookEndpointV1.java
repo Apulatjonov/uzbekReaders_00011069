@@ -3,6 +3,7 @@ package com.example.bookstore.endpoint;
 import com.example.bookstore.base.BaseURI;
 import com.example.bookstore.models.BookDTO;
 import com.example.bookstore.models.BookRatingDTO;
+import com.example.bookstore.models.PageDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,9 @@ public interface BookEndpointV1 {
 
     @GetMapping(BaseURI.getBooks)
     ResponseEntity<?> getBooks();
+
+    @PostMapping(BaseURI.addPage)
+    ResponseEntity<?> addPage(@RequestBody PageDTO dto);
 
     @PostMapping(BaseURI.rate)
     ResponseEntity<?> rateBook(@RequestBody BookRatingDTO dto);

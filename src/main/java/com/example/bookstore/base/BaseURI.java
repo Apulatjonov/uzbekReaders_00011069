@@ -46,4 +46,5 @@ public interface BaseURI {
     String quit = "/quit";
     String finish = "/finish";
     String getStats = "/stats";
+    String addPage = "/page";
 }

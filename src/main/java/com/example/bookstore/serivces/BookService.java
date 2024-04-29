@@ -68,7 +68,7 @@ public class BookService {
         stats.setViews(stats.getViews() + 1);
         bookStatsRepo.save(stats);
 
-        BookDTO dto = new BookDTO().fromEntity(book);
+        BookDTO dto = new BookDTO(book);
         return dto;
     }
 
@@ -109,6 +109,7 @@ public class BookService {
         book.setCategoryName(category.getCategory());
         book.setUser(userEnt.get());
         book.setScore(0L);
+        book.setTotalPages(0L);
         Book saved = bookRepo.save(book);
 
         BookStats stats = new BookStats();
@@ -124,7 +125,7 @@ public class BookService {
         stats.setBook(book);
         bookStatsRepo.save(stats);
 
-        return new BookDTO().fromEntity(saved);
+        return new BookDTO(saved);
     }
 
     public AuthorDTO addAuthor(String name) {
@@ -143,7 +144,7 @@ public class BookService {
         List<Book> list = bookRepo.searchBooksByAuthorNameContainingIgnoreCaseOrTitleContainingIgnoreCaseOrCategoryNameContainingIgnoreCase(search, search, search);
         List<BookDTO> books = new ArrayList<>();
         for (Book book : list) {
-            books.add(new BookDTO().fromEntity(book));
+            books.add(new BookDTO(book));
         }
         return books;
     }
@@ -252,7 +253,7 @@ public class BookService {
             throw new NotFoundException("Book not found!", 404);
         }
         Book book = entity.get();
-        BookDTO dto = new BookDTO().fromEntity(book);
+        BookDTO dto = new BookDTO(book);
         return dto;
     }
 
@@ -582,5 +583,21 @@ public class BookService {
                 .map(book -> new BookStatsDTO(bookStatsRepo.findByBookId(book.getId()).get()))
                 .collect(Collectors.toList());
         return list;
+    }
+
+    public Boolean addPage(PageDTO dto) {
+        Optional<Book> bookEnt = bookRepo.findById(dto.getBookId());
+        if (bookEnt.isEmpty()){
+            throw new NotFoundException("Book not found!", 404);
+        }
+        Book book = bookEnt.get();
+        BookPage page = new BookPage();
+        page.setBookId(dto.getBookId());
+        page.setPageNumber(dto.getPageNumber());
+        page.setContent(dto.getContent());
+        pageRepository.save(page);
+        book.setTotalPages(Long.valueOf(book.getTotalPages() + 1));
+        bookRepo.save(book);
+        return Boolean.TRUE;
     }
 }
