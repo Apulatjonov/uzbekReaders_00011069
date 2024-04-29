@@ -17,12 +17,19 @@ public interface UsersEndpointV1 {
 
     @PostMapping(BaseURI.signUp)
     ResponseEntity<?> signUp(@RequestBody BaseUser user);
+
     @PostMapping(BaseURI.signIn)
     ResponseEntity<?> singIn(@RequestBody BaseUser user);
+
     @PostMapping(BaseURI.fillProfile)
     ResponseEntity<?> fillProfile(@RequestBody UserDTO userDTO);
+
     @DeleteMapping(BaseURI.DeleteProfile + "/{id}")
     ResponseEntity<?> deleteProfile(@PathVariable Long id);
+
     @GetMapping("/{id}")
     ResponseEntity<?> getProfile(@PathVariable Long id);
+
+    @GetMapping(BaseURI.getStats + "/{id}")
+    ResponseEntity<?> getStats(@PathVariable Long id);
 }

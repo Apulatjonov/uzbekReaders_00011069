@@ -45,4 +45,9 @@ public class UserController extends BaseController implements UsersEndpointV1 {
     public ResponseEntity<?> getProfile(Long id) {
         return ResponseEntity.ok(service.getProfile(id));
     }
+
+    @Override
+    public ResponseEntity<?> getStats(Long id) {
+        return ResponseEntity.ok(service.getStats(id));
+    }
 }

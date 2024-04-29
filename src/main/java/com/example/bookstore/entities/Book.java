@@ -24,35 +24,65 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
-    @Column(name = "author")
-    private String author;
+
+    @Column(name = "authorName")
+    private String authorName;
+
+    @ManyToOne
+    private Author author;
+
     @Column(name = "title")
     private String title;
-    @Column(name = "category")
-    private String category;
+
+    @Column(name = "category_name")
+    private String categoryName;
+
+    @ManyToOne
+    private Category category;
+
     @Column(name = "score")
     private Long score;
+
     @Column(name = "img_url")
     private String imgUrl;
+
     @Column(name = "price")
     private Double price;
+
     @Column(name = "description")
     private String description;
+
     @OneToMany(mappedBy = "book")
     @Column(name = "comments")
     private List<Comment> comments;
+
     @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "customers", referencedColumnName = "books")
     private Set<User> customers;
+
     @Column(name = "published_date")
     private LocalDateTime publishedDate = LocalDateTime.now();
+
+    @Column(name = "total_page")
+    private Long totalPages;
+
+    @OneToMany
+    private Set<ReaderBook> readerBook;
+
+    @ManyToOne
+    private User user;
+
+    @OneToMany
+    private Set<Transaction> transactions;
+
+    @OneToOne
+    private BookStats stats;
 
     public BaseBook toBaseBook() {
         BaseBook book = new BaseBook();
         book.setId(this.getId());
-        book.setCategory(this.getCategory());
-        book.setAuthor(this.getAuthor());
-        book.setTitle(this.getAuthor());
+        book.setCategoryName(this.getCategory().getCategory());
+        book.setAuthorName(this.getAuthorName());
+        book.setTitle(this.getTitle());
         book.setPrice(this.getPrice());
         book.setImgUrl(this.getImgUrl());
         return book;

@@ -65,4 +65,9 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             AlreadyRatedException ex, WebRequest request){
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.valueOf(402), request);
     }
+    @ExceptionHandler(value = NotEnoughFundingException.class)
+    protected ResponseEntity<?> handleNotEnoughFundingException(
+            NotEnoughFundingException ex, WebRequest request){
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.valueOf(402), request);
+    }
 }

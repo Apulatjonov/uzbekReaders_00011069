@@ -3,9 +3,7 @@ package com.example.bookstore.endpoint;
 import com.example.bookstore.base.BaseURI;
 import com.example.bookstore.models.PaymentDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Abdulaziz Pulatjonov
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface PaymentEndpointV1 {
     @PostMapping(BaseURI.pay)
     ResponseEntity<?> pay(@RequestBody PaymentDTO paymentDTO);
+
     @PostMapping(BaseURI.fillBalance)
     ResponseEntity<?> fillCard(PaymentDTO paymentDTO);
 }

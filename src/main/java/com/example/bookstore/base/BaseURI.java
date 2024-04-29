@@ -36,4 +36,14 @@ public interface BaseURI {
     String recentlyViewed = "/recentlyViewed";
     String rated = "/rated";
     String category = "/category";
+    String pages = "/pages";
+    String next = "/next";
+    String prev = "/prev";
+    String author = "/author";
+    String getAll = "/all";
+    String add = "/add";
+    String categories = "/categories";
+    String quit = "/quit";
+    String finish = "/finish";
+    String getStats = "/stats";
 }

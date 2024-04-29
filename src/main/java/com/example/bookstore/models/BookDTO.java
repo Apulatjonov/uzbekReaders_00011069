@@ -23,13 +23,22 @@ public class BookDTO extends BaseBook{
     private List<CommentDTO> comments;
     private String description;
     private LocalDateTime publishedDate;
+    private List<PageDTO> pages;
+    private Long authorId;
+    private Long categoryId;
+    private CategoryDTO category;
+    private AuthorDTO author;
+    private Long userId;
 
     public BookDTO(Book ent) {
         this.setId(ent.getId());
         this.setTitle(ent.getTitle());
-        this.setAuthor(ent.getAuthor());
+        this.setAuthorName(ent.getAuthorName());
+        this.setAuthorId(ent.getAuthor().getId());
+        this.setCategoryId(ent.getCategory().getId());
+        this.setCategoryName(ent.getCategory().getCategory());
         this.setScore(ent.getScore());
-        this.setCategory(ent.getCategory());
+        this.setCategoryName(ent.getCategory().getCategory());
         this.setImgUrl(ent.getImgUrl());
         this.setPrice(ent.getPrice());
         this.setDescription(ent.getDescription());
@@ -37,31 +46,36 @@ public class BookDTO extends BaseBook{
     }
 
     public BookDTO fromEntity(Book book){
-        this.setId(book.getId());
-        this.setScore(book.getScore());
-        this.setAuthor(book.getAuthor());
-        this.setCategory(book.getCategory());
-        this.setTitle(book.getTitle());
-        this.setImgUrl(book.getImgUrl());
-        this.setPrice(book.getPrice());
-        this.setDescription(book.getDescription());
-        List<CommentDTO> comments = new ArrayList<>();
-        for (Comment comment : book.getComments()){
-            comments.add(new CommentDTO().fromEntity(comment));
+        BookDTO dto = new BookDTO();
+        dto.setId(book.getId());
+        dto.setScore(book.getScore());
+        dto.setAuthorName(book.getAuthor().getFullName());
+        dto.setAuthorId(book.getAuthor().getId());
+        dto.setCategoryName(book.getCategory().getCategory());
+        dto.setCategoryId(book.getCategory().getId());
+        dto.setTitle(book.getTitle());
+        dto.setImgUrl(book.getImgUrl());
+        dto.setPrice(book.getPrice());
+        dto.setDescription(book.getDescription());
+        if (book.getComments() != null){
+            List<CommentDTO> comments = new ArrayList<>();
+            for (Comment comment : book.getComments()){
+                comments.add(new CommentDTO().fromEntity(comment));
+            }
+            dto.setComments(comments);
         }
-        this.setComments(comments);
-        this.setPublishedDate(book.getPublishedDate());
-        return this;
+        dto.setPublishedDate(book.getPublishedDate());
+        return dto;
     }
     public Book toEntity(){
         Book book = new Book();
         book.setScore(this.getScore());
-        book.setAuthor(this.getAuthor());
+        book.setAuthorName(this.getAuthorName());
         book.setTitle(this.getTitle());
-        book.setCategory(this.getCategory());
         book.setPrice(this.getPrice());
         book.setDescription(this.getDescription());
         book.setPublishedDate(LocalDateTime.now());
+        book.setImgUrl(this.getImgUrl());
         return book;
     }
 }

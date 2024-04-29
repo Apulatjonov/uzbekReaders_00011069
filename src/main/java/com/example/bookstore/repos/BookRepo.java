@@ -16,6 +16,11 @@ import java.util.List;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
-    List<Book> searchBooksByAuthorOrCategoryOrTitle(String word, String category, String title);
-    List<Book> findAllByCategory(String category);
+    List<Book> searchBooksByAuthorNameContainingIgnoreCaseOrTitleContainingIgnoreCaseOrCategoryNameContainingIgnoreCase(String word, String title, String category);
+
+    List<Book> findAllByCategoryId(Long category);
+
+    List<Book> findAllByAuthorId(Long id);
+
+    List<Book> findAllByUserId(Long id);
 }

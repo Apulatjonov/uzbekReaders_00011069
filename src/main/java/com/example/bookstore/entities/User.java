@@ -23,25 +23,53 @@ public class User extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "password")
     private String password;
+
     @OneToMany(mappedBy = "user")
     @Column(name = "cards")
     private Set<Card> cards;
+
     @Column(name = "paid_till")
     private LocalDateTime paidTill;
+
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Book> recentlyViewedBooks;
+    private Set<BookView> recentlyViewedBooks;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Book> ratedBooks;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Book> books;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Book> finished;
+
+    @OneToMany
+    private Set<ReaderBook> readerBook;
+
+    @OneToMany(mappedBy = "user")
+    @Column(name = "my_publications")
+    private Set<Book> myPublications;
+
+    @OneToMany
+    private Set<Transaction> transactions;
+
+    @OneToMany
+    private Set<Transaction> payments;
+
+    @Column(name = "e_wallet")
+    private Double eWallet;
 
     public User(BaseUser userDTO) {
         this.email = userDTO.getEmail();

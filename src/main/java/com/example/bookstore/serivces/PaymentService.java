@@ -8,6 +8,7 @@ import com.example.bookstore.exceptions.InsufficientCardBalanceException;
 import com.example.bookstore.exceptions.UserNotFoundException;
 import com.example.bookstore.models.CardDTO;
 import com.example.bookstore.models.PaymentDTO;
+import com.example.bookstore.models.FinStatsDTO;
 import com.example.bookstore.repos.CardRepo;
 import com.example.bookstore.repos.PaymentRepo;
 import com.example.bookstore.repos.UserRepo;

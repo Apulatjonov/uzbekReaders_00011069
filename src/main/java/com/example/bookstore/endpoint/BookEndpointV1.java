@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(BaseURI.api + BaseURI.v1 + BaseURI.book)
 public interface BookEndpointV1 {
+
     @GetMapping(BaseURI.getBook + "/{id}/userId/{userId}")
-    ResponseEntity<?> getBook(@PathVariable Long id, @PathVariable Long userId);
+    ResponseEntity<?> getBookSignedIn(@PathVariable Long id, @PathVariable Long userId);
 
     @PostMapping(BaseURI.addBook)
     ResponseEntity<?> addBook(@RequestBody BookDTO bookDTO);
@@ -37,9 +38,37 @@ public interface BookEndpointV1 {
     @GetMapping(BaseURI.rated + "/{id}")
     ResponseEntity<?> getRatedBooks(@PathVariable Long id);
 
-    @GetMapping(BaseURI.category + "/{category}")
-    ResponseEntity<?> getByCategory(@PathVariable String category);
-    @GetMapping(BaseURI.book + "/id")
+    @GetMapping(BaseURI.category + "/{id}")
+    ResponseEntity<?> getByCategory(@PathVariable Long id);
+
+    @GetMapping(BaseURI.book + "/{id}")
     ResponseEntity<?> getBook(@PathVariable Long id);
+
+    @GetMapping("/{userId}/{id}" + BaseURI.pages)
+    ResponseEntity<?> getPages(@PathVariable Long userId, @PathVariable Long id);
+
+    @GetMapping("{userId}/{id}" + BaseURI.next)
+    ResponseEntity<?> getNext(@PathVariable Long userId, @PathVariable Long id);
+
+    @GetMapping("{userId}/{id}" + BaseURI.prev)
+    ResponseEntity<?> getPrev(@PathVariable Long userId, @PathVariable Long id);
+
+    @GetMapping(BaseURI.myBooks + "/{id}")
+    ResponseEntity<?> getMyBooks(@PathVariable Long id);
+
+    @GetMapping(BaseURI.categories)
+    ResponseEntity<?> getCategories();
+
+    @GetMapping(BaseURI.quit + "/{id}/{userId}")
+    ResponseEntity<?> quitReading(@PathVariable Long id, @PathVariable Long userId);
+
+    @GetMapping(BaseURI.finish + "/{id}/{userId}")
+    ResponseEntity<?> finishReading(@PathVariable Long id, @PathVariable Long userId);
+
+    @GetMapping(BaseURI.getStats + "/{bookId}")
+    ResponseEntity<?> getStats(@PathVariable Long bookId);
+
+    @GetMapping(BaseURI.getStats + "/user/{id}")
+    ResponseEntity<?> getUserStats(@PathVariable Long id);
 
 }
